@@ -1,0 +1,123 @@
+<div class="container contact">
+  <h5>Novo Convidado</h5>
+
+  <form [formGroup]="formConvidado" (ngSubmit)="submit()">
+    <div class="row">
+      <div class="form-group">
+        <label for="input-name" class="acltive">Nome: *</label>
+        <input
+          class="validate"
+          id="nome"
+          formControlName="nome"
+          type="text"
+          ng-minlength="5"
+          required
+        />
+        <div class="red-text" *ngIf="f.nome.errors?.required && f.nome.touched">
+          Campo Obrigatório
+        </div>
+        <div
+          class="red-text"
+          *ngIf="f.nome.errors?.minlength && f.nome.touched"
+        >
+          O Tamanho deve ser no Mínimo
+          {{ f.nome.errors?.minlength.requiredLength }} letras.
+          {{
+            f.nome.errors?.minlength.requiredLength -
+              f.nome.errors?.minlength.actualLength
+          }}
+          Letras faltando.
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field cols12">
+        <label for="input-name" class="acltive">Endereço:</label>
+        <input
+          type="text"
+          formControlName="endereco"
+          class="validate"
+          required
+        />
+        <div
+          class="red-text"
+          *ngIf="f.endereco.errors?.required && f.endereco.touched"
+        >
+          Campo Obrigatório
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field cols12">
+        <label for="input-name" class="acltive">Telefone:</label>
+        <input
+          type="tel"
+          formControlName="telefone"
+          nome="telefone"
+          mask="(00)0000-00000"
+          class="validate"
+          required
+        />
+        <div
+          class="red-text"
+          *ngIf="f.telefone.errors?.required && f.telefone.touched"
+        >
+          Campo Obrigatório
+        </div>
+
+        <div
+          class="red-text"
+          *ngIf="f.telefone.errors?.minlength && f.telefone.touched"
+        >
+          Número Inválido
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field cols12">
+        <label for="input-name" class="acltive">E-mail:</label>
+        <input type="text" formControlName="email" class="validate" />
+        <div
+          class="red-text"
+          *ngIf="f.email.errors?.required && f.email.touched"
+        >
+          E-mail Obrigatório
+        </div>
+
+        <div class="red-text" *ngIf="f.email.errors && f.email.touched">
+          E-mail Inválido
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s12">
+        <label for="input-name" class="acltive">Faixa Etária</label>
+
+        <select formControlName="faixaEtaria">
+          <option value="-1" selected>Escolha uma faixa Etária</option>
+          <option value="Criança">Criança</option>
+          <option value="Adolescente">Adolescente</option>
+          <option value="Jovem">Jovem</option>
+          <option value="Adulto">Adulto</option>
+          <option value="Idoso">Idoso</option>
+        </select>
+      </div>
+    </div>
+    <br />
+    <button
+      class="btn waves-effect waves-light"
+      type="submit"
+      name="action"
+      [disabled]="!formConvidado.valid"
+    >
+      Enviar
+      <i class="material-icons right">send</i>
+    </button>
+  </form>
+
+  <app-listar-convidados></app-listar-convidados>
+</div>

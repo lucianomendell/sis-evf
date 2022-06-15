@@ -1,3 +1,4 @@
+import { NgxMaskModule } from 'ngx-mask';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -9,13 +10,21 @@ import { RodapeComponent } from './component/rodape/rodape.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 
-import { ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { MatInputModule } from '@angular/material/input';
+import { ConvidadoFormComponent } from './component/convidado/convidado-form/convidado-form.component';
+import { ListarConvidadosComponent } from './component/convidado/listar-convidados/listar-convidados.component';
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent, RodapeComponent],
+  declarations: [
+    AppComponent,
+    MenuComponent,
+    RodapeComponent,
+    ConvidadoFormComponent,
+    ListarConvidadosComponent,
+  ],
   imports: [
     CommonModule,
     BrowserModule,
@@ -25,7 +34,12 @@ import { MatInputModule } from '@angular/material/input';
     MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
+    FormsModule,
+    NgxMaskModule.forRoot({
+      dropSpecialCharacters: false,
+    }),
   ],
+  exports: [MatInputModule],
   providers: [],
   bootstrap: [AppComponent],
 })
