@@ -2,6 +2,7 @@ import { Convidado } from './../../../model/convidado';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConvidadoServiceService } from 'src/app/services/convidado-service.service';
 
 @Component({
   selector: 'app-convidado-form',
@@ -30,12 +31,31 @@ export class ConvidadoFormComponent implements OnInit {
     faixaEtaria: new FormControl('', [Validators.required]),
   });
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private convidadoService: ConvidadoServiceService
+  ) {
     this.convidados = [];
   }
 
   ngOnInit(): void {
     this.getAll();
+
+    /*this.convidadoService.getById(1).then((u) => {
+
+    });*/
+
+    /*
+    let convidado = new Convidado();
+
+    convidado.id = 3;
+    convidado.nome = ' Júnior Sousa';
+    convidado.endereco = ' Ceilândia Sil';
+    convidado.telefone = '(61) 888-101010';
+    (convidado.nome = 'juniorSouza@hotmail.com'),
+      (convidado.faixaEtaria = 'Velho');
+
+    this.convidadoService.save(convidado);*/
   }
 
   get f() {
@@ -55,21 +75,31 @@ export class ConvidadoFormComponent implements OnInit {
 
   submit() {
     if (!this.formConvidado.get('nome')?.hasError('required')) {
-      this.formConvidado.value.id = String(Math.round(Math.random() * 100));
-      const convidado: Convidado = this.formConvidado.value;
-      this.convidados.push(convidado);
+      let convidado = new Convidado();
 
-      localStorage.setItem('convidado', JSON.stringify(this.convidados));
+      convidado.nome = this.formConvidado.value.nome;
+      convidado.endereco = this.formConvidado.value.endereco;
+      convidado.telefone = this.formConvidado.value.telefone;
+      convidado.email = this.formConvidado.value.email;
+      convidado.faixaEtaria = this.formConvidado.value.faixaEtaria;
+
+      this.convidadoService
+        .save(convidado)
+        .then((convidado) => {})
+        .catch((e) => {
+          console.log('Erro ');
+        })
+        .finally(() => {});
+
       this.router.navigate(['listar']);
-      this.formConvidado.reset();
     }
   }
 
   getAll(): void {
-    if (localStorage.getItem('convidado')) {
-      this.convidados = JSON.parse(localStorage.getItem('convidado')!);
-    } else {
-      this.convidados = [];
-    }
+    this.convidadoService.getAll().then((resposta) => {
+      resposta?.forEach((element) => {
+        this.convidados.push(element);
+      });
+    });
   }
 }

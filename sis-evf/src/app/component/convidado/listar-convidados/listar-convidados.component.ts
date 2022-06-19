@@ -1,3 +1,4 @@
+import { ConvidadoServiceService } from 'src/app/services/convidado-service.service';
 import { Convidado } from './../../../model/convidado';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class ListarConvidadosComponent implements OnInit {
   convidados: Convidado[];
 
-  constructor() {
+  constructor(private convidadoService: ConvidadoServiceService) {
     this.convidados = [];
   }
 
@@ -18,11 +19,11 @@ export class ListarConvidadosComponent implements OnInit {
   }
 
   getAll(): void {
-    if (localStorage.getItem('convidado')) {
-      this.convidados = JSON.parse(localStorage.getItem('convidado')!);
-    } else {
-      this.convidados = [];
-    }
+    this.convidadoService.getAll().then((resposta) => {
+      resposta?.forEach((element) => {
+        this.convidados.push(element);
+      });
+    });
   }
 
   onClickItem(t: any) {

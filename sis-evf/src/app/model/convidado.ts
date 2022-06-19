@@ -3,5 +3,6 @@ export class Convidado {
   nome?: string;
   telefone?: string;
   endereco?: string;
+  email?: string;
   faixaEtaria?: string;
 }

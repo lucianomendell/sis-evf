@@ -16,6 +16,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { ConvidadoFormComponent } from './component/convidado/convidado-form/convidado-form.component';
 import { ListarConvidadosComponent } from './component/convidado/listar-convidados/listar-convidados.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ListarConvidadosComponent } from './component/convidado/listar-convidad
   imports: [
     CommonModule,
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     MatFormFieldModule,
     ReactiveFormsModule,

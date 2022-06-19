@@ -1,0 +1,5 @@
+{
+  "/convidados/nome/:n": "/convidados?nome=:n",
+  "/convidados?:id": "/convidados/:id",
+  "/convidados": "/convidados"
+}
