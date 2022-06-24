@@ -1,3 +1,4 @@
+import { DetalhesConvidadoComponent } from './component/convidado/detalhes-convidado/detalhes-convidado.component';
 import { ListarConvidadosComponent } from './component/convidado/listar-convidados/listar-convidados.component';
 import { ConvidadoFormComponent } from './component/convidado/convidado-form/convidado-form.component';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'listar',
     component: ListarConvidadosComponent,
+  },
+  {
+    path: 'detalhes/:id',
+    component: DetalhesConvidadoComponent,
   },
 ];
 

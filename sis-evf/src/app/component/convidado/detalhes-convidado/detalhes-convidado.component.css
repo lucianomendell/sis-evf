@@ -5,3 +5,8 @@ mat-error {
 .toast {
   background-color: blueviolet !important;
 }
+
+.active {
+  color: #00bfff;
+  font-weight: bold;
+}

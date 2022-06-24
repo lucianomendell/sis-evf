@@ -17,6 +17,10 @@ import { MatInputModule } from '@angular/material/input';
 import { ConvidadoFormComponent } from './component/convidado/convidado-form/convidado-form.component';
 import { ListarConvidadosComponent } from './component/convidado/listar-convidados/listar-convidados.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DetalhesConvidadoComponent } from './component/convidado/detalhes-convidado/detalhes-convidado.component';
+import { ConvidadoMensagemComponent } from './component/convidado/convidado-mensagem/convidado-mensagem.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     RodapeComponent,
     ConvidadoFormComponent,
     ListarConvidadosComponent,
+    DetalhesConvidadoComponent,
+    ConvidadoMensagemComponent,
   ],
   imports: [
     CommonModule,
@@ -37,9 +43,11 @@ import { HttpClientModule } from '@angular/common/http';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    MatDialogModule,
     NgxMaskModule.forRoot({
       dropSpecialCharacters: false,
     }),
+    BrowserAnimationsModule,
   ],
   exports: [MatInputModule],
   providers: [],

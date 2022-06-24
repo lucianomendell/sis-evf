@@ -1,8 +1,10 @@
 import { Convidado } from './../../../model/convidado';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConvidadoServiceService } from 'src/app/services/convidado-service.service';
+
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-convidado-form',
@@ -27,7 +29,6 @@ export class ConvidadoFormComponent implements OnInit {
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       ),
     ]),
-
     faixaEtaria: new FormControl('', [Validators.required]),
   });
 
@@ -40,22 +41,6 @@ export class ConvidadoFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
-
-    /*this.convidadoService.getById(1).then((u) => {
-
-    });*/
-
-    /*
-    let convidado = new Convidado();
-
-    convidado.id = 3;
-    convidado.nome = ' Júnior Sousa';
-    convidado.endereco = ' Ceilândia Sil';
-    convidado.telefone = '(61) 888-101010';
-    (convidado.nome = 'juniorSouza@hotmail.com'),
-      (convidado.faixaEtaria = 'Velho');
-
-    this.convidadoService.save(convidado);*/
   }
 
   get f() {
@@ -83,23 +68,30 @@ export class ConvidadoFormComponent implements OnInit {
       convidado.email = this.formConvidado.value.email;
       convidado.faixaEtaria = this.formConvidado.value.faixaEtaria;
 
-      this.convidadoService
-        .save(convidado)
-        .then((convidado) => {})
-        .catch((e) => {
-          console.log('Erro ');
-        })
-        .finally(() => {});
+      this.convidadoService.save(convidado).subscribe(
+        (res) => {
+          M.toast({ html: 'Registro Salvo com Sucesso!' });
+        },
+        (err) => {
+          M.toast({ html: 'Erro ao Gravar' });
+        }
+      );
 
       this.router.navigate(['listar']);
     }
   }
 
   getAll(): void {
-    this.convidadoService.getAll().then((resposta) => {
-      resposta?.forEach((element) => {
-        this.convidados.push(element);
-      });
-    });
+    this.convidadoService.getAll().subscribe(
+      (res: Convidado[]) => {
+        if (!res || res.length == 0) {
+          return;
+        }
+        this.convidados = res;
+      },
+      (error) => {
+        alert(error.message);
+      }
+    );
   }
 }

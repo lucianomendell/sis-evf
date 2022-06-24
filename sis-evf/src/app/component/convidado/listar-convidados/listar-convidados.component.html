@@ -1,25 +1,76 @@
 <div class="container">
-  <h2>Cadastro de Convidado</h2>
-  <table class="col s12">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Telefone</th>
-        <th>Faixa Etária</th>
-      </tr>
-    </thead>
+  <div *ngIf="exibirMensagem" class="centralizar">
+    <button
+      style="width: 800px"
+      class="btn waves-effect waves-light"
+      type="submit"
+      name="action"
+      (click)="novoCadastro()"
+    >
+      Novo
+      <i class="material-icons right">person_add</i>
+    </button>
 
-    <tbody>
-      <tr
-        *ngFor="let convidado of this.convidados"
-        (click)="onClickItem(convidado)"
-      >
-        <td>{{ convidado?.id }}</td>
-        <td>{{ convidado?.nome }}</td>
-        <td>{{ convidado?.telefone }}</td>
-        <td>{{ convidado?.faixaEtaria }}</td>
-      </tr>
-    </tbody>
-  </table>
+    <div style="margin-top: 5rem">Nenhum registro Encontrado</div>
+  </div>
+
+  <div *ngIf="!exibirMensagem" style="padding-top: 3rem">
+    <table class="col s12" style="margin-top: 40px">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Telefone</th>
+          <th>Faixa Etária</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr
+          *ngFor="let convidado of this.convidados"
+          (click)="onClickItem(convidado)"
+        >
+          <td>{{ convidado?.id }}</td>
+          <td>{{ convidado?.nome }}</td>
+          <td>{{ convidado?.telefone }}</td>
+          <td>{{ convidado?.faixaEtaria }}</td>
+          <td>
+            <button
+              class="btn waves-effect waves-light"
+              type="submit"
+              name="action"
+              (click)="novoCadastro()"
+            >
+              Novo
+              <i class="material-icons right">person_add</i>
+            </button>
+
+            <button
+              class="btn waves-effect waves-light"
+              type="submit"
+              name="detalhes"
+              (click)="detalhes(convidado)"
+            >
+              Detalhes
+              <i class="material-icons left">zoom_in</i>
+            </button>
+
+            <button
+              class="btn waves-effect waves-light"
+              type="submit"
+              name="deletar"
+              (click)="deleter(convidado)"
+            >
+              Deletar
+              <i class="material-icons left">delete</i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <app-convidado-mensagem
+    [mensagemFilho]="mensagemPai"
+  ></app-convidado-mensagem>
 </div>

@@ -1,0 +1,14 @@
+p {
+  text-align: center;
+  font-size: 25px;
+  padding-top: 3rem;
+}
+.deletado {
+  color: red;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.formatData {
+  color: #228b22;
+  font-weight: bold;
+}
