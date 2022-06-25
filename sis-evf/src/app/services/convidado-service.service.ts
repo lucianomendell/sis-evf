@@ -9,7 +9,7 @@ import { catchError, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ConvidadoServiceService {
-  private readonly API = environment.API;
+  URL = 'http://localhost:3000/convidados';
   constructor(private http: HttpClient) {}
 
   httpOptions = {
@@ -19,18 +19,18 @@ export class ConvidadoServiceService {
   //Criado apenas um Promise para atender atividade Solicitada
 
   getById(id: number): Promise<Convidado | undefined> {
-    return this.http.get<Convidado>(`${this.API}?${id}`).toPromise();
+    return this.http.get<Convidado>(`${this.URL}?${id}`).toPromise();
   }
 
   getAll(): Observable<Convidado[]> {
     return this.http
-      .get<Convidado[]>(`${this.API}`)
+      .get<Convidado[]>(`${this.URL}`)
       .pipe(catchError(ErrorUtil.handleError));
   }
 
   save(convidado: Convidado): Observable<Convidado> {
     return this.http.post<Convidado>(
-      `${this.API}`,
+      `${this.URL}`,
       convidado,
       this.httpOptions
     );
@@ -41,7 +41,7 @@ export class ConvidadoServiceService {
     const options = id ? { params: query } : {};
 
     return this.http
-      .delete<void>(`${this.API}/${id}`, options)
+      .delete<void>(`${this.URL}/${id}`, options)
       .pipe(catchError(ErrorUtil.handleError));
   }
 
