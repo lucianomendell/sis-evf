@@ -30,9 +30,8 @@
             "scripts": []
           },
           "configurations": {
+            "sourceMap": true,
             "production": {
-              "sourceMap": true,
-
               "budgets": [
                 {
                   "type": "initial",
