@@ -9,7 +9,7 @@ app.use("/api", jsonServer.router("db.json"));
 app.use(express.static(__dirname + "/dist/sis-evf"));
 
 app.get("/*", (req, res) => {
-  res.sendFile(__dirname + "/dist/sis-evfnpm install/index.html");
+  res.sendFile(__dirname + "/dist/sis-evf/index.html");
 });
 
 app.listen(PORT, () => {
