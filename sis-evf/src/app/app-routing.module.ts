@@ -10,7 +10,7 @@ const routes: Routes = [
     component: ConvidadoFormComponent,
   },
   {
-    path: 'listar',
+    path: 'convidados',
     component: ListarConvidadosComponent,
   },
   {

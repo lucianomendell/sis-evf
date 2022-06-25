@@ -2,11 +2,10 @@
   "name": "sis-evf",
   "version": "0.0.0",
   "engines": {
-    "node": "14.17.16"
+    "node": "14.17.6"
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
