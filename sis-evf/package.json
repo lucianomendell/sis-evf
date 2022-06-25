@@ -1,12 +1,13 @@
 {
   "name": "sis-evf",
   "version": "0.0.0",
+  "engines": {
+    "node": "14.17.16"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href=/pos/",
-    "ghpages": "angular-cli-ghpages --dir=dist/pos",
-    "deploy": "npm run build & npm run ghpages",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "json:server": "json-server --watch db.json",

@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { ErrorUtil } from './../Util/error-util';
 import { Convidado } from '../model/convidado';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -8,9 +9,8 @@ import { catchError, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ConvidadoServiceService {
+  private readonly API = environment.API;
   constructor(private httpClient: HttpClient) {}
-
-  URL = 'http://localhost:3000/convidados';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -19,18 +19,18 @@ export class ConvidadoServiceService {
   //Criado apenas um Promise para atender atividade Solicitada
 
   getById(id: number): Promise<Convidado | undefined> {
-    return this.httpClient.get<Convidado>(`${this.URL}?${id}`).toPromise();
+    return this.httpClient.get<Convidado>(`${this.API}?${id}`).toPromise();
   }
 
   getAll(): Observable<Convidado[]> {
     return this.httpClient
-      .get<Convidado[]>(`${this.URL}`)
+      .get<Convidado[]>(`${this.API}`)
       .pipe(catchError(ErrorUtil.handleError));
   }
 
   save(convidado: Convidado): Observable<Convidado> {
     return this.httpClient.post<Convidado>(
-      `${this.URL}`,
+      `${this.API}`,
       convidado,
       this.httpOptions
     );
@@ -41,7 +41,7 @@ export class ConvidadoServiceService {
     const options = id ? { params: query } : {};
 
     return this.httpClient
-      .delete<void>(`${this.URL}/${id}`, options)
+      .delete<void>(`${this.API}/${id}`, options)
       .pipe(catchError(ErrorUtil.handleError));
   }
 
