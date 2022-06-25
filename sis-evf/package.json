@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href=/pos/",
-    "ghpages": "angular-cli-ghpages --dir=dist/pos",
+    "build": "ng build --base-href=/sis-evf/",
+    "ghpages": "angular-cli-ghpages --dir=dist/sis-evf",
     "deploy": "npm run build & npm run ghpages",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
